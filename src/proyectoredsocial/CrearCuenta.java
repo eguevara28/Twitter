@@ -212,7 +212,7 @@ public class CrearCuenta extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+        try{
         if(camponombre.getText().equals("")){
             System.out.println("No ingreso su nombre");
             JOptionPane.showMessageDialog(null, "No ingreso su nombre");
@@ -260,6 +260,10 @@ public class CrearCuenta extends javax.swing.JFrame {
             System.out.println("Esta cuenta ya existe");
             JOptionPane.showMessageDialog(null, "Esta cuenta ya existe");
         }        
+        }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Ingrese los valores pedido correctamente");
+            campoedad.setText("");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

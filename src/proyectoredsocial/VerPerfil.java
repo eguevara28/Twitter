@@ -27,8 +27,8 @@ public class VerPerfil extends javax.swing.JFrame {
     private void foto(){
         String genero=Users.getGeneroVisita();
         
-        ImageIcon hombre = new ImageIcon(getClass().getResource("/fotos/fotoperfilhombre.png"));
-        ImageIcon mujer = new ImageIcon(getClass().getResource("/fotos/fotoperfilmujer.png"));
+        ImageIcon hombre = new ImageIcon(getClass().getResource("/fotos/perfilhombre.jpg"));
+        ImageIcon mujer = new ImageIcon(getClass().getResource("/fotos/perfilmujer.jpg"));
         if(genero.equals("M")){
             fotoperfil.setIcon(hombre);
         }else if(genero.equals("F")){

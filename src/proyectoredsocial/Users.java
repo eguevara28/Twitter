@@ -50,6 +50,10 @@ public class Users {
         edadvisita=u.edad;
     }
     
+    public static int getEdadVisita(){
+        return edadvisita;
+    }
+    
     public static void resetGeneroLoggeado(){
         generologgeado=null;
     }

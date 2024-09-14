@@ -4,20 +4,12 @@
  */
 package proyectoredsocial;
 
-import java.util.List;
-import javax.swing.DefaultListModel;
-
 /**
  *
- * @author enigm
+ * @author ernes
  */
 public class Menciones extends javax.swing.JFrame {
-    private static Tweets t=new Tweets();
-    private String[][] menciones; 
-    private int[] numeroMenciones; 
-    private String usuarioActual; 
-    private DefaultListModel<String> mencionesListModel;
-
+private static Tweets t =new Tweets();
     /**
      * Creates new form Menciones
      */
@@ -25,7 +17,7 @@ public class Menciones extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         String[] menciones=Tweets.obtenerMenciones();
-        mencionesList.setListData(menciones);
+        mencioneslist.setListData(menciones);
     }
 
     /**
@@ -38,28 +30,35 @@ public class Menciones extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        scrollPaneMenciones = new javax.swing.JScrollPane();
-        mencionesList = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        mencioneslist = new javax.swing.JList<>();
         jButton1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
 
-        scrollPaneMenciones.setViewportView(mencionesList);
-
-        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Menciones");
 
+        jScrollPane1.setViewportView(mencioneslist);
+
+        jButton1.setBackground(new java.awt.Color(0, 0, 0));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Regresar");
+        jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Tweets en los que te han mencionado:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -68,26 +67,30 @@ public class Menciones extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jButton1)
-                        .addGap(28, 28, 28)
-                        .addComponent(scrollPaneMenciones, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(223, 223, 223)
+                        .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(160, 160, 160)
-                        .addComponent(jLabel1)))
-                .addContainerGap(137, Short.MAX_VALUE))
+                        .addGap(138, 138, 138)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(49, 49, 49)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(147, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 53, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrollPaneMenciones, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(32, 32, 32))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -105,77 +108,15 @@ public class Menciones extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Timeline TM = new Timeline();
-        TM.setVisible(true);
+        // TODO add your handling code here:
+        Timeline tl=new Timeline();
+        tl.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
-/*
-    private void inicializarDatos() {
-        this.usuarioActual = Users.getUsuariologgeado();  
-        
-        menciones = new String[Users.usuarios.length][10];
-        numeroMenciones = new int[Users.usuarios.length]; 
-        
-        mencionesListModel = new DefaultListModel<>();
-        mencionesList.setModel(mencionesListModel);
 
-        mostrarMenciones();
-    }
-    
-    private void mostrarMenciones() {
-    int indiceUsuario = obtenerIndiceUsuario(usuarioActual);
-
-    if (indiceUsuario == -1 || numeroMenciones[indiceUsuario] == 0) {
-        mencionesListModel.addElement("No tienes menciones aún");
-    } else {
-        mencionesListModel.clear();
-        for (int i = 0; i < numeroMenciones[indiceUsuario]; i++) {
-            mencionesListModel.addElement(menciones[indiceUsuario][i]);
-        }
-    }
-    }
-    
-    public void publicarTwit(String usuarioQuePublica, String mensaje, Calendar fecha) {
-        for (Users u : Users.usuarios) {
-            if (u != null && mensaje.contains("@" + u.username)) {
-                agregarMencion(u.username, usuarioQuePublica, mensaje, fecha);
-            }
-        }
-    }
-    
-    public void agregarMencion(String usuarioMencionado, String usuarioQuePublica, String mensaje, Calendar fecha) {
-        int indiceUsuario = obtenerIndiceUsuario(usuarioMencionado);
-        if (indiceUsuario != -1 && numeroMenciones[indiceUsuario] < menciones[indiceUsuario].length) {
-            
-            String fechaFormateada = fecha.get(Calendar.DAY_OF_MONTH) + "/" + (fecha.get(Calendar.MONTH) + 1);
-            
-            String mencion = usuarioQuePublica + ": \"" + mensaje + "\"  (" + fechaFormateada + ")";
-            
-            menciones[indiceUsuario][numeroMenciones[indiceUsuario]] = mencion;
-            
-            numeroMenciones[indiceUsuario]++;
-            
-            if (usuarioMencionado.equals(usuarioActual)) {
-                mostrarMenciones();
-            }
-        }
-    }
-    
-    private int obtenerIndiceUsuario(String usuario) {
-        for (int i = 0; i < Users.usuarios.length; i++) {
-            if (Users.usuarios[i] != null && Users.usuarios[i].username.equals(usuario)) {
-                return i;
-            }
-        }
-        return -1;  
-    }
-    */
-    
-    
-    
-
-    
-    
+    /**
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -208,15 +149,12 @@ public class Menciones extends javax.swing.JFrame {
         });
     }
 
-    
-    
-    
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JList<String> mencionesList;
-    private javax.swing.JScrollPane scrollPaneMenciones;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<String> mencioneslist;
     // End of variables declaration//GEN-END:variables
 }

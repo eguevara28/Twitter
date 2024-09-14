@@ -101,6 +101,19 @@ public class Tweets {
         }
         return tweetsusuario;
     }
+    public static String[] obtenerTweetsMiPerfil(){
+        int contador=0;
+        String usuario=Users.getUsuariologgeado();
+        String[] tweetsusuario=new String[300];
+        for(Tweets t: tweets){
+            if(t!=null && t.username.equals(usuario)){
+                tweetsusuario[contador]=t.printtweets();
+                contador++;
+            }
+        }
+        return tweetsusuario;
+    }
+    
 }
 
        
