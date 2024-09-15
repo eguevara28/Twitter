@@ -49,7 +49,7 @@ public class Tweets {
         int indice = 0;
 
         for (Tweets t : tweets) {
-            if (t != null && (t.username.equals(usuarioLoggeado) || contiene(seguidos, t.username))) {
+            if (t != null && (t.username.equals(usuarioLoggeado) || contiene(seguidos, t.username)) && Users.buscarUsuario(t.username).estado ) {
                 tweetsFiltrados[indice++] = t.printtweets();
             }
         }
@@ -66,27 +66,34 @@ public class Tweets {
         return false;
     }
     
-    public static String[] obtenerHashtag(String hashtagbuscado){
-        int contador=0;
-        String[] tweetsHashtag=new String[300];
-        for(Tweets t:tweets){
-            if(t!=null && t.printtweets().contains("#"+hashtagbuscado)){
-                tweetsHashtag[contador++]=t.printtweets();
+    public static String[] obtenerHashtag(String hashtagbuscado) {
+    int contador = 0;
+    String[] tweetsHashtag = new String[100];
+    for (Tweets t : tweets) {
+        if (t != null && t.printtweets().contains("#" + hashtagbuscado)) {
+            Users u = Users.buscarUsuario(t.username);
+            if (u != null && u.estado) {
+                tweetsHashtag[contador++] = t.printtweets();
             }
         }
-        return tweetsHashtag;
+    }
+    return tweetsHashtag;
     }
 
-    public static String[] obtenerMenciones(){
-        int contador=0;
-        String usuario=Users.getUsuariologgeado();
-        String[] tweetsMencion=new String[300];
-        for(Tweets t: tweets){
-            if(t!=null && t.tweet.contains("@"+usuario)){
-                tweetsMencion[contador++]=t.printtweets();
+    public static String[] ObtenerMencionesFiltradas(){
+        int contador = 0;
+        String usuario = Users.getUsuariologgeado();
+
+        String[] tweetMencion = new String[300];
+        for(Tweets t : tweets){
+            if(t != null && t.tweet.contains("@"+ usuario)){
+                Users u = Users.buscarUsuario(t.username);
+                if(u != null && u.estado){
+                    tweetMencion[contador++]= t.printtweets();
+                }
             }
         }
-        return tweetsMencion;
+        return tweetMencion;
     }
     
     public static String[] obtenerTweetsUsuario(){
@@ -101,6 +108,7 @@ public class Tweets {
         }
         return tweetsusuario;
     }
+    
     public static String[] obtenerTweetsMiPerfil(){
         int contador=0;
         String usuario=Users.getUsuariologgeado();

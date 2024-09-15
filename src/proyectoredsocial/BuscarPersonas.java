@@ -167,6 +167,7 @@ public class BuscarPersonas extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        try{
         String usernameseleccionado=resultadosList.getSelectedValue();
         if(usernameseleccionado.equals(Users.getUsuariologgeado())){
             JOptionPane.showMessageDialog(null, "Para entrar a tu perfil tienes que ir al apartado de Mi Perfil ");
@@ -181,6 +182,9 @@ public class BuscarPersonas extends javax.swing.JFrame {
         VerPerfil vp=new VerPerfil();
         vp.setVisible(true);
         this.dispose();
+        }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Tienes que seleccionar un usuario de la lista");
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 

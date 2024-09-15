@@ -4,6 +4,8 @@
  */
 package proyectoredsocial;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ernes
@@ -95,7 +97,8 @@ public class Users {
         Users u=buscarUsuario(username);
         int cantidad=0;
         for (int i = 0; i < seguidores.length; i++) {
-            if(u.seguidores[i]!=null){
+            Users verificar=buscarUsuario(u.seguidores[i]);
+            if(u.seguidores[i]!=null && verificar.estado){
                 cantidad++;
             }
         }
@@ -106,7 +109,8 @@ public class Users {
         Users u=buscarUsuario(username);
         int cantidad=0;
         for (int i = 0; i < seguidos.length; i++) {
-            if(u.seguidos[i]!=null){
+            Users verificar=buscarUsuario(u.seguidos[i]);
+            if(u.seguidos[i]!=null && verificar.estado){
                 cantidad++;
             }
         }
@@ -239,7 +243,7 @@ public class Users {
         int indice = 0;
         
         for (Users u : usuarios) {
-            if (u != null && u.username.contains(usuarioabuscar) && u.estado==true) {
+            if (u != null && !u.username.equals(usuariolog) && u.username.contains(usuarioabuscar) && u.estado==true) {
                 resultados[indice] = u;
                 indice++;
             }
@@ -267,4 +271,32 @@ public class Users {
         return false;
     }
     
+public void desactivarCuenta(){
+    String Options[]= {"SI","NO"};
+    int opcion = JOptionPane.showOptionDialog(null, "¿Deseas desactivar la cuenta?", "Seleccione", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,null,Options, null);
+    
+    if(opcion == 0){ 
+        String usuario = Users.getUsuariologgeado();
+        Users u = Users.buscarUsuario(usuario);
+        
+        if(u != null){
+            u.estado = false;
+            Inicio i = new Inicio();
+            i.setVisible(true);
+        }
+    } else { 
+        JOptionPane.getRootFrame().dispose();
+    }
 }
+    
+    public boolean reactivarCuenta(String username){
+        Users u=buscarUsuario(username);
+        if(u.estado==false){
+        u.estado=true;
+        return true;
+        }
+        return false;
+        }
+}
+    
+
